@@ -1,0 +1,41 @@
+<style>
+  body {
+    background-color: black;
+  }
+
+  .btn-primary{
+    background-color: grey;
+    border: 1px solid black;
+  }
+
+  h1{
+    color: white;
+  }
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+<div class="container">
+  <h1 class="text-center">Restaurants</h1>
+
+  <br>
+
+  <div class="row">
+    <% @restaurants.each do |restaurant| %>
+      <div class="col-lg-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= restaurant.name %></h5>
+            <p class="card-text"><strong>Location:</strong> <%= restaurant.address %></p>
+            <p class="card-text"><strong>Phone:</strong> <%= restaurant.phone_number %></p>
+            <p class="card-text"><strong>Category:</strong> <%= restaurant.category %></p>
+            <%= link_to "See details", restaurant_path(restaurant), class: "btn btn-primary"%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%= link_to "New Restaurant", new_restaurant_path, class: "btn btn-primary"%>
+  </div>
+</div>

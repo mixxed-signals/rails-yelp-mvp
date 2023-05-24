@@ -1,0 +1,47 @@
+<style>
+  body {
+    background-color: black;
+  }
+
+  .btn-primary{
+    background-color: grey;
+    border: 1px solid black;
+  }
+
+  h1, h2{
+    color: white;
+  }
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><%= @restaurant.name %></h5>
+    <p class="card-text"><strong>Location:</strong> <%= @restaurant.address %></p>
+    <p class="card-text"><strong>Phone:</strong> <%= @restaurant.phone_number %></p>
+    <p class="card-text"><strong>Category:</strong> <%= @restaurant.category %></p>
+    <%= link_to "Add review", new_restaurant_review_path(@restaurant), class: "btn btn-primary"%>
+  </div>
+</div>
+
+<br>
+<h2>Reviews</h2>
+<% if @restaurant.reviews.any? %>
+  <% @restaurant.reviews.each do |review| %>
+    <div class="card mt-3">
+      <div class="card-body">
+        <p class="card-text"><%= review.content %></p>
+        <p class="card-text"><strong>Rating:</strong> <%= review.rating %></p>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <p>No reviews yet.</p>
+<% end %>
+
+<div>
+  <%= link_to "Back to restaurants", restaurants_path %>
+</div>

@@ -1,0 +1,49 @@
+1. create restaurant Model
+
+-rails g model Restaurant name address phone_number:integer category
+
+2. create review Model
+
+-rails generate model Review content:text rating:integer restaurant:references
+
+3. NESTED -> foreign_key
+
+-automatically reviews belongs_to :restaurants
+-add in restauratn model: has_many :reviews
+
+4. VALIDATIONS
+
+-validates: column presence:true
+
+5. SEED
+
+- populate db with faker
+
+6. CREATE controllers
+
+- rails g controller restaurants index show new create
+
+- rails g controller reviews new create
+
+- define actions -> use refactoring (set), use strong params in private method to access for POST methods
+
+- in reviews -> use params[:restaurant_id] @restaurant = Restaurant.find(params[:restaurant_id])
+    + set id -> @review.restaurant = @restaurant
+- in restaurants -> use params[:id]
+
+7. ROUTES
+
+- add all necessary paths:
+
+resources :restaurants, only: [:index, :show, :new, :create] do
+  resources :reviews --> nested sonthat path is restaurants/id/reviews
+
+8. VIEWS
+
+restaurants:
+- index: display all the restaurants + link_to see details +link_to create new
+- show: display one restaurant + link_to Add review
+- new: form -> simple_form_for(@review) do |f|
+
+- new: create form -> simple_form_for [@restaurant, @review] do |f|
+- create: no view
